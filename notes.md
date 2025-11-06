@@ -28,3 +28,14 @@ Add authn procedures(trpc)
 create a new branch
 create a new PR
 Review & merge
+
+
+05 Theme & styling
+
+Apply new theme 
+Improve auth screens 
+add logos -> use logoipsum
+-push to github
+create a new branch
+create a new PR
+Review & merge

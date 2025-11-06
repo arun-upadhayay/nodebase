@@ -30,13 +30,17 @@ import {
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 
-const registerSchema = z.object({
-  email: z.email("Please enter a valid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-  confirmPassword: z.string(),
-}).refine((data) => data.password === data.confirmPassword, { message: "Passwords do not match", path: ["confirmPassword"] });
+const registerSchema = z
+  .object({
+    email: z.email("Please enter a valid email address"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 type registerFormValues = z.infer<typeof registerSchema>;
-
 
 export function RegisterForm() {
   const router = useRouter();
@@ -50,20 +54,24 @@ export function RegisterForm() {
   });
 
   const onSubmit = async (value: registerFormValues) => {
-    await authClient.signUp.email({
-   name: value.email,
-   email: value.email,
-   password: value.password,
-   callbackURL: "/"
-    },{
-      onSuccess: () => {
-        toast.success("Account created successfully");
-        router.push("/");
+    await authClient.signUp.email(
+      {
+        name: value.email,
+        email: value.email,
+        password: value.password,
+        callbackURL: "/",
       },
-      onError: (ctx) => {
-        toast.error(ctx.error.message);
+      {
+        onSuccess: () => {
+          toast.success("Account created successfully");
+          router.push("/");
+        },
+        onError: (ctx) => {
+          toast.error(ctx.error.message);
+        },
       }
-    }) };
+    );
+  };
 
   const isPending = form.formState.isSubmitting;
   return (
@@ -83,16 +91,28 @@ export function RegisterForm() {
                     variant={"outline"}
                     className="w-full"
                     type="button"
-                    disabled
+                    
                   >
+                    <Image
+                      src="/logos/github.svg"
+                      width={20}
+                      height={20}
+                      alt="github"
+                    />
                     Continue with GitHub
                   </Button>
                   <Button
                     variant={"outline"}
                     className="w-full"
                     type="button"
-                    disabled
+                    
                   >
+                    <Image
+                      src="/logos/google.svg"
+                      width={20}
+                      height={20}
+                      alt="google"
+                    />
                     Continue with Google
                   </Button>
                 </div>
@@ -148,18 +168,16 @@ export function RegisterForm() {
                       </FormItem>
                     )}
                   />
-                  <Button
-                    type="submit"
-                    className="w-full"
-                    disabled={isPending}
-                  >
+                  <Button type="submit" className="w-full" disabled={isPending}>
                     Sign Up
                   </Button>
                 </div>
-                <div className="text-center text-sm">Already have an account? {" "}
-                    <Link href="/login"
-                    className="underline underline-offset-4"
-                    > Login</Link>
+                <div className="text-center text-sm">
+                  Already have an account?{" "}
+                  <Link href="/login" className="underline underline-offset-4">
+                    {" "}
+                    Login
+                  </Link>
                 </div>
               </div>
             </form>
