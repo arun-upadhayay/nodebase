@@ -49,3 +49,20 @@ create a background job
 create a new branch
 create a new PR
 Review & merge
+
+
+07 AI providers
+
+Choose AI model(s)
+-Gemini(free)
+openAI(min $5)
+-anthropic(min $5)
+-....
+
+setup AI SDK
+-use AI with inngest
+
+-push to github
+create a new branch
+create a new PR
+review & merge
