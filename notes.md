@@ -39,3 +39,13 @@ add logos -> use logoipsum
 create a new branch
 create a new PR
 Review & merge
+
+06 Background jobs 
+
+-setup Inngest
+create a background job
+-add mprocs to run the job
+-push to github
+create a new branch
+create a new PR
+Review & merge
