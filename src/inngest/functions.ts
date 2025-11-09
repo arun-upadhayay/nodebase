@@ -2,6 +2,8 @@ import { inngest } from "./client";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { createOpenAI } from "@ai-sdk/openai";
 import { createAnthropic } from "@ai-sdk/anthropic";
+import * as Sentry from "@sentry/nextjs";
+
 
 import { generateText } from "ai";
 
@@ -14,10 +16,13 @@ export const executeAi = inngest.createFunction(
   { id: "execute-ai" },
   { event: "execute/ai" },
 
-  async ({ event, step }) => {
+  async ({ step }: any ) => {
     
     await step.sleep("Wait for 5 seconds", "5s");
 
+    Sentry.logger.info("this is an info message", {log_source: "sentry_test"})
+    console.warn("something is missing")
+    console.log("this is an error i want to test ")
     const { steps: geminiSteps } = await step.ai.wrap(
       "gemini-generate-text",
       generateText,
@@ -25,6 +30,12 @@ export const executeAi = inngest.createFunction(
         model: google("gemini-2.5-flash"),
         system: "You are a helpful assistant.",
         prompt: "Write a short story about a robot that loves cats.",
+      experimental_telemetry:{
+        isEnabled: true,
+        recordInputs: true,
+        recordOutputs: true,
+      }
+      
       }
     );
 
@@ -35,6 +46,11 @@ export const executeAi = inngest.createFunction(
         model: openai("gpt-4"),
         system: "You are a helpful assistant.",
         prompt: "Write a short story about a robot that loves cats.",
+              experimental_telemetry:{
+        isEnabled: true,
+        recordInputs: true,
+        recordOutputs: true,
+      }
       }
     );
     const { steps: anthropicSteps } = await step.ai.wrap(
@@ -44,6 +60,11 @@ export const executeAi = inngest.createFunction(
         model: anthropic("claude-3-7-sonnet-latest"),
         system: "You are a helpful assistant.",
         prompt: "Write a short story about a robot that loves cats.",
+            experimental_telemetry:{
+        isEnabled: true,
+        recordInputs: true,
+        recordOutputs: true,
+      }
       }
     );
     return {

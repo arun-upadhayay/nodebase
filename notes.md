@@ -66,3 +66,18 @@ setup AI SDK
 create a new branch
 create a new PR
 review & merge
+
+
+08 Error tracking 
+
+-setup sentry
+npm install @sentry/nextjs --save
+-demonstrate error tracking
+  -session replays
+  -logs
+  -ai monitoring
+
+-push to github
+create a new branch
+create a new PR
+review & merge
