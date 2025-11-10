@@ -7,7 +7,9 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "inngest:dev": "inngest-cli dev",
+    "dev:all": "concurrently -n \"next,inngest\" -c \"blue,green\" \"npm run dev\" \"npm run inngest:dev\""
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^2.0.41",
@@ -78,6 +80,9 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
+    "inngest-cli": "^1.13.4",
+    "mprocs": "^0.7.3",
     "patch-package": "^8.0.1",
     "postinstall-postinstall": "^2.1.0",
     "prisma": "^6.18.0",

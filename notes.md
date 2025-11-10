@@ -81,3 +81,13 @@ npm install @sentry/nextjs --save
 create a new branch
 create a new PR
 review & merge
+
+
+09 Sidebar Layout
+- Improve file structure
+- create placeholder routes 
+- create sidebar layout
+- push to github
+- create a new branch
+- create a new PR
+- review & merge
