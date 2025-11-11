@@ -104,3 +104,17 @@ review & merge
   - create a new branch
   - create a new PR
   - review & merge
+
+11 Workflows CRUD
+
+- Update workflow schema
+- Create workflow APIs
+  -create
+  -Read
+  -Update
+  -Delete
+  
+- Push to github
+- Create a new branch
+- Create a new PR
+- Review & merge
