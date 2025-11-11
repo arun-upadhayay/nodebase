@@ -91,3 +91,16 @@ review & merge
 - create a new branch
 - create a new PR
 - review & merge
+
+
+10 Payments 
+ 
+ - Setup Polar
+ - Integrate with better Auth
+ - Create checkout 
+ - create billing portal
+ 
+ - push to github
+  - create a new branch
+  - create a new PR
+  - review & merge
