@@ -118,3 +118,19 @@ review & merge
 - Create a new branch
 - Create a new PR
 - Review & merge
+
+
+12 Workflow Pagination 
+- update "get many" procedure
+- Add NUQS for param handling
+    -client side 
+    -server side
+
+-Add "entity" components
+-Add UI for pagination
+-Add UI for search 
+
+-push to github
+create a new branch
+create a new PR
+Review & merge
