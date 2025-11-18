@@ -164,3 +164,20 @@ Review & merge
 create a new branch
 create a new PR
 Review & merge
+
+
+15 Editor
+
+   -Create "Editor" component
+     -Add react-flow
+     -Add initial nodes
+  -update schema 
+    -Add "Node" table
+    -Add "connection" table
+
+  -Load default editor state 
+
+-push to github
+create a new branch   
+create a new PR
+Review & merge
