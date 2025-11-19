@@ -181,3 +181,17 @@ Review & merge
 create a new branch   
 create a new PR
 Review & merge
+
+
+16 Node selector 
+
+   -Add "maual trigger" node
+   -Add "http request" node 
+   -Create node selector component
+   -Add editor state 
+   -enable editor save functiopnality
+
+   -push to github
+   -create a new branch
+   -create a new PR
+   -Review & merge
