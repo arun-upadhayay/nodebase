@@ -195,3 +195,15 @@ Review & merge
    -create a new branch
    -create a new PR
    -Review & merge
+
+
+
+17 Editor state
+   -Add save functionality
+   -Add delete functionality
+   -Add settings functionality
+
+   -push to github
+   -create a new branch
+   -create a new PR
+   -Review & merge
