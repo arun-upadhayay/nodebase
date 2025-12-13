@@ -1,76 +1,49 @@
+import { NonRetriableError } from "inngest";
 import { inngest } from "./client";
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
-import { createOpenAI } from "@ai-sdk/openai";
-import { createAnthropic } from "@ai-sdk/anthropic";
-import * as Sentry from "@sentry/nextjs";
+import prisma from "@/lib/db";
+import { topoloicalSort } from "./utils";
+import { NodeType } from "@/generated/prisma";
+import { getExecutor } from "@/features/executions/lib/executor-registry";
 
+export const executeWorkflow = inngest.createFunction(
+  { id: "execute-workflow" },
+  { event: "workflows/execute.workflow" },
 
-import { generateText } from "ai";
+  async ({ event, step }) => {
+    const workflowId = event.data.workflowId;
 
-const google = createGoogleGenerativeAI();
-const openai = createOpenAI();
-const anthropic = createAnthropic();
+    if (!workflowId) {
+      throw new NonRetriableError("workflowId is missing");
+    }
 
-export const executeAi = inngest.createFunction(
+    const sortedNodes = await step.run("prepare-workflow", async () => {
+      const workflow = await prisma.workflow.findUniqueOrThrow({
+        where: { id: workflowId },
+        include: {
+          nodes: true,
+          connections: true,
+        },
+      });
 
-  { id: "execute-ai" },
-  { event: "execute/ai" },
+      // importent to return nodes here
+      return topoloicalSort(workflow.nodes, workflow.connections);
+    });
 
-  async ({ step }: any ) => {
-    
-    await step.sleep("Wait for 5 seconds", "5s");
+    // Inirialize the context with  any initial data from the trigger node
 
-    Sentry.logger.info("this is an info message", {log_source: "sentry_test"})
-    console.warn("something is missing")
-    console.log("this is an error i want to test ")
-    const { steps: geminiSteps } = await step.ai.wrap(
-      "gemini-generate-text",
-      generateText,
-      {
-        model: google("gemini-2.5-flash"),
-        system: "You are a helpful assistant.",
-        prompt: "Write a short story about a robot that loves cats.",
-      experimental_telemetry:{
-        isEnabled: true,
-        recordInputs: true,
-        recordOutputs: true,
-      }
-      
-      }
-    );
+    let context = event.data.initialData || {};
 
-    const { steps: openaiSteps } = await step.ai.wrap(
-      "openai-generate-text",
-      generateText,
-      {
-        model: openai("gpt-4"),
-        system: "You are a helpful assistant.",
-        prompt: "Write a short story about a robot that loves cats.",
-              experimental_telemetry:{
-        isEnabled: true,
-        recordInputs: true,
-        recordOutputs: true,
-      }
-      }
-    );
-    const { steps: anthropicSteps } = await step.ai.wrap(
-      "anthropic-generate-text",
-      generateText,
-      {
-        model: anthropic("claude-3-7-sonnet-latest"),
-        system: "You are a helpful assistant.",
-        prompt: "Write a short story about a robot that loves cats.",
-            experimental_telemetry:{
-        isEnabled: true,
-        recordInputs: true,
-        recordOutputs: true,
-      }
-      }
-    );
-    return {
-      geminiSteps,
-      openaiSteps,
-      anthropicSteps,
-    };
+    // execute each node hare
+    for (const node of sortedNodes) {
+      const executor = getExecutor(node.type as NodeType);
+      context = await executor({
+        data: node.data as Record<string, unknown>,
+        nodeId: node.id,
+        context,
+        step,
+      });
+    }
+
+    return { workflowId, result: context };
   }
 );

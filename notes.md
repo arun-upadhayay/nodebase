@@ -207,3 +207,17 @@ Review & merge
    -create a new branch
    -create a new PR
    -Review & merge
+
+18 Node Execution
+
+-imporve props for dialog
+
+- shiw "execute" button
+- create "execute" inngest function 
+- Topology sort 
+- create executor registory 
+
+-push to github
+create a new branch
+create a new PR
+Review & merge

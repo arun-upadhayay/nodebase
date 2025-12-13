@@ -90,9 +90,6 @@ export const useUpdateWorkflowName = () => {
   );
 };
 
-
-
-
 /**
  * Hook to update a workflow
  */
@@ -112,6 +109,25 @@ export const useUpdateWorkflow = () => {
       },
       onError: (error) => {
         toast.error(`Failed to save workflow: ${error.message}`);
+      },
+    })
+  );
+};
+
+/**
+ * Hook to execute a workflow
+ */
+
+export const useExecuteWorkflow = () => {
+  const trpc = useTRPC();
+
+  return useMutation(
+    trpc.workflows.execute.mutationOptions({
+      onSuccess: (data) => {
+        toast.success(`Workflow "${data.name}" executed `);
+      },
+      onError: (error) => {
+        toast.error(`Failed to execute workflow: ${error.message}`);
       },
     })
   );
