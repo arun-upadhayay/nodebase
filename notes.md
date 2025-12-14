@@ -221,3 +221,17 @@ Review & merge
 create a new branch
 create a new PR
 Review & merge
+
+19 Node Variables
+   - fix codeRabbit issue
+   - contentType header
+   -"cyclic" error message
+
+   -Fix key collision
+     - add "variableName" to UI 
+     - Use "variableName" in context
+
+   -push to github
+   -create a new branch
+   -create a new PR
+   -Review & merge
