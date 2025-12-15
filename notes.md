@@ -235,3 +235,14 @@ Review & merge
    -create a new branch
    -create a new PR
    -Review & merge
+
+20 Node Templating 
+  -refactor "variableName" in executor 
+  - Implement templating systax
+    - Allow dynamic body 
+    - Allow dynamic endpoint 
+
+  -push to github
+  -create a new branch
+  -create a new PR
+  -Review & merge
