@@ -246,3 +246,16 @@ Review & merge
   -create a new branch
   -create a new PR
   -Review & merge
+
+21 Node realtime 
+   - Add @inngest/realtime
+   - create "httpRequest" channel
+   - Publish events (loading, error, success)
+   - capture events "useNodeStatus"
+
+   -push to github
+   -create a new branch
+   -create a new PR
+   -Review & merge
+
+   
