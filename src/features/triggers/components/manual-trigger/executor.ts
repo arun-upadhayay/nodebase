@@ -1,21 +1,29 @@
-
-
 import { NodeExecutor } from "@/features/executions/types";
 import { NodeType } from "@/generated/prisma";
-
+import { manualTriggerChannel } from "@/inngest/channels/manual-trigger";
 
 type ManualTriggerData = Record<string, unknown>;
 
 export const manualTriggerExecutor: NodeExecutor<ManualTriggerData> = async ({
-    nodeId,
-    context,
-    step
+  nodeId,
+  context,
+  step,
+  publish,
 }) => {
-   // TODO publishp "loading" state for manual trigger
+  await publish(
+    manualTriggerChannel().status({ 
+        nodeId, 
+        status: "loading" 
+    }));
+  const result = await step.run("manual-trigger", async () => context);
 
-   const result = await step.run("manual-trigger", async () => context);
-   
-   //TODO: Publish "success" state for manual trigger
 
-   return result;
-};        
+    await publish(
+    manualTriggerChannel().status({ 
+        nodeId, 
+        status: "success" 
+    }));
+
+
+  return result;
+};
