@@ -8,7 +8,8 @@ export const executorRegistry: Record<NodeType, NodeExecutor> = {
   [NodeType.INITIAL]: manualTriggerExecutor,
   [NodeType.MANUAL_TRIGGER]: manualTriggerExecutor,
   [NodeType.HTTP_REQUEST]: HttpRequestExecutor, // TODO: fix types
-  [NodeType.GOOGLE_FORM_TRIGGER]: GoogleFormTriggerExecutor
+  [NodeType.GOOGLE_FORM_TRIGGER]: GoogleFormTriggerExecutor,
+  [NodeType.STRIPE_TRIGGER]: GoogleFormTriggerExecutor
 };
 
 
