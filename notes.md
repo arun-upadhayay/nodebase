@@ -274,3 +274,21 @@ Review & merge
   - create a new branch
   - create a new PR
   - Review & merge
+
+
+
+23 Stripe Trigger 
+   - Add Stripe trigger node
+     - node 
+     - dialog
+     - executor
+     - realtime channel
+     - webhook
+ 
+ - Trigger a stripe event
+
+ - Push to Github
+  - Create a new branch
+  - Create a new PR
+  - Review & merge
+  

@@ -39,6 +39,13 @@ const triggerNodes: NodeTypeOption[] = [
     description:
       "Run the flow when a google From is submitted.",
   },
+  {
+    type: NodeType.STRIPE_TRIGGER,
+    label: "Stripe Checkout",
+    icon: "/logos/stripe.svg",
+    description:
+      "Run the flow when a stripe checkout is completed.",
+  },
 ];
 
 const executionNodes: NodeTypeOption[] = [
