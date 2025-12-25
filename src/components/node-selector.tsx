@@ -32,6 +32,13 @@ const triggerNodes: NodeTypeOption[] = [
     description:
       "Run the flow on clicking a button. Good for getting started quickly.",
   },
+  {
+    type: NodeType.GOOGLE_FORM_TRIGGER,
+    label: "Google Form",
+    icon: "/logos/googleform.svg",
+    description:
+      "Run the flow when a google From is submitted.",
+  },
 ];
 
 const executionNodes: NodeTypeOption[] = [

@@ -259,3 +259,18 @@ Review & merge
    -Review & merge
 
    
+22 Google form trigger 
+   - Add Google from trigger node
+     - node 
+     - dialog
+     - executor
+     - realtime channel
+     - webhook
+
+ - Create a google form 
+  - create a new "App Script"
+
+- push to github
+  - create a new branch
+  - create a new PR
+  - Review & merge
